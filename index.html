@@ -236,31 +236,33 @@ main{display:none;position:relative;z-index:2}
 .verres{width:120px;height:64px;margin:8px auto 0;display:block;animation:coeur 1.25s ease-in-out infinite;transform-origin:center}
 @keyframes coeur{40%{transform:scale(1.08)}70%{transform:scale(1)}}
 .cd-date{
-  margin:6px 0 20px;text-align:center;
-  font:italic 500 clamp(1.15rem,3.5vw,1.4rem)/1.3 'Cormorant Garamond',serif;
-  color:var(--orf);letter-spacing:.06em;text-transform:lowercase;
+  margin:4px 0 18px;text-align:center;
+  font:clamp(1.55rem,4.5vw,1.9rem)/1.2 'Great Vibes',cursive;
+  color:var(--orf);text-transform:lowercase;
 }
 .cd{
-  display:flex;justify-content:center;align-items:center;gap:12px;
+  display:flex;justify-content:center;align-items:center;gap:14px;
   margin:0;flex-wrap:wrap;
 }
 .cd div{
-  width:78px;height:78px;min-width:78px;padding:0;
+  width:92px;height:92px;min-width:92px;padding:10px 6px 12px;
   border:1.5px solid rgba(201,162,39,.75);
   background:radial-gradient(circle at 35% 30%,#fffdf8,#f7ebe0 70%,#f0e0cc);
   border-radius:50%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
   box-shadow:0 10px 22px rgba(90,52,38,.1), inset 0 1px 0 rgba(255,255,255,.7);
 }
 .cd b{
   display:block;
-  font:500 1.65rem/1 'Cormorant Garamond',serif;
-  color:var(--bleuf);font-variant-numeric:tabular-nums;
-  letter-spacing:.02em;
+  font:700 clamp(1.85rem,5vw,2.25rem)/.9 'Great Vibes',cursive;
+  color:var(--bleuf);
+  -webkit-text-stroke:.35px var(--bleuf);
 }
 .cd small{
-  font:italic 400 .78rem/1 'Cormorant Garamond',serif;
-  letter-spacing:.02em;text-transform:lowercase;color:var(--orf);
+  display:block;margin-top:2px;
+  font:700 clamp(.95rem,2.8vw,1.15rem)/1 'Great Vibes',cursive;
+  text-transform:lowercase;color:var(--orf);
+  -webkit-text-stroke:.2px var(--orf);
 }
 #cdmsg{font:2.2rem 'Great Vibes',cursive;color:var(--brun);margin-top:8px}
 .jour{font:600 1.45rem 'Cormorant Garamond',serif;color:var(--bleuf)}
