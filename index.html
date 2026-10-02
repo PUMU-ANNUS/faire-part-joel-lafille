@@ -144,19 +144,88 @@ main{display:none;position:relative;z-index:2}
 .bloc{width:min(560px,100%);margin:0 auto;padding:54px 22px;text-align:center}
 .hero{
   position:relative;min-height:100dvh;display:flex;align-items:center;justify-content:center;
-  padding:96px 28px 70px;background:#fbf6ef;
+  padding:96px 28px 80px;overflow:hidden;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 38%, #fffdf8 0%, #f7ebe0 42%, #ead7c0 78%, #e0c8ae 100%),
+    #f3e6d6;
 }
-.toile{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.hero-in{position:relative;z-index:1;max-width:340px}
-.surs{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--bleuf)}
-.ser{margin:10px 0 4px;font:italic 500 1.35rem 'Cormorant Garamond',serif;color:var(--orf)}
-.noms{display:flex;flex-direction:column;align-items:center;font:500 clamp(3.2rem,12vw,4.6rem)/1 'Cormorant Garamond',serif;color:var(--bleuf);font-weight:500;animation:souffle 4.6s ease-in-out infinite}
-.noms span{display:block;font:1.9rem/1 'Great Vibes',cursive;color:var(--orf);margin:6px 0 2px}
-@keyframes souffle{50%{letter-spacing:.02em;transform:scale(1.035)}}
-.dt{margin-top:14px;letter-spacing:.28em;font:500 1.15rem 'Cormorant Garamond',serif;color:var(--brun)}
-.lieu-script{margin-top:8px;font:1.7rem 'Great Vibes',cursive;color:var(--orf)}
-.defile{margin-top:28px;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--orf);animation:rebond 1.7s ease-in-out infinite}
-@keyframes rebond{50%{transform:translateY(7px)}}
+.hero::before{
+  content:"";position:absolute;inset:-20%;pointer-events:none;opacity:.55;
+  background:conic-gradient(from 0deg at 50% 45%,
+    transparent 0deg, rgba(255,252,246,.55) 12deg, transparent 28deg,
+    transparent 45deg, rgba(212,175,55,.18) 58deg, transparent 78deg,
+    transparent 110deg, rgba(255,248,230,.4) 130deg, transparent 155deg,
+    transparent 200deg, rgba(201,162,39,.14) 220deg, transparent 250deg,
+    transparent 300deg, rgba(255,252,246,.35) 325deg, transparent 350deg);
+  animation:rayons 48s linear infinite;
+}
+@keyframes rayons{to{transform:rotate(360deg)}}
+.toile{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hero-in{
+  position:relative;z-index:2;max-width:380px;text-align:center;
+  padding:28px 18px 18px;
+}
+.reveal{opacity:0;transform:translateY(18px)}
+.go .reveal{
+  animation:monter 1s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay:var(--d,0s);
+}
+@keyframes monter{to{opacity:1;transform:none}}
+.orn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:12px auto;
+}
+.orn span{
+  display:block;width:42px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--or),transparent);
+}
+.orn i{
+  width:7px;height:7px;border:1px solid var(--or);transform:rotate(45deg);
+  box-shadow:0 0 0 3px rgba(201,162,39,.12);
+}
+.surs{
+  font-size:.7rem;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--brun);font-weight:500;
+}
+.ser{
+  margin:6px 0 2px;font:italic 500 clamp(1.35rem,4.5vw,1.65rem) 'Cormorant Garamond',serif;
+  color:var(--orf);
+}
+.noms{
+  display:flex;flex-direction:column;align-items:center;
+  font:500 clamp(3.4rem,13vw,5rem)/.95 'Cormorant Garamond',serif;
+  color:var(--bleuf);font-weight:500;
+  text-shadow:0 1px 0 rgba(255,252,246,.8), 0 10px 28px rgba(90,52,38,.08);
+}
+.go .noms{
+  animation:souffle 5.2s ease-in-out 1.3s infinite;
+}
+.noms span{
+  display:block;font:clamp(2rem,7vw,2.5rem)/1 'Great Vibes',cursive;
+  color:var(--orf);margin:4px 0 0;
+  filter:drop-shadow(0 2px 6px rgba(141,107,36,.18));
+}
+@keyframes souffle{
+  0%,100%{letter-spacing:0;transform:scale(1)}
+  50%{letter-spacing:.03em;transform:scale(1.03)}
+}
+.dt{
+  margin-top:6px;letter-spacing:.36em;
+  font:500 1.2rem 'Cormorant Garamond',serif;color:var(--brun);
+}
+.lieu-script{
+  margin-top:10px;font:clamp(1.65rem,5vw,2rem) 'Great Vibes',cursive;color:var(--orf);
+}
+.defile{
+  margin-top:34px;display:inline-flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--orf);
+  }
+.go .defile{animation:rebond 1.9s ease-in-out 1.5s infinite}
+.defile .chev{
+  width:10px;height:10px;border-right:1.5px solid var(--or);border-bottom:1.5px solid var(--or);
+  transform:rotate(45deg);opacity:.85;
+}
+@keyframes rebond{50%{transform:translateY(8px)}}
 .h2{font:italic 500 2rem 'Cormorant Garamond',serif;color:var(--bleuf);margin-bottom:12px}
 .regle{width:72px;height:1px;margin:14px auto;background:linear-gradient(90deg,transparent,var(--or),transparent)}
 .msg{font:italic 400 1.25rem/1.65 'Cormorant Garamond',serif;max-width:36rem;margin:0 auto}
@@ -197,10 +266,12 @@ main{display:none;position:relative;z-index:2}
 }
 .go #son{display:grid}
 #vie{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:85}
-.go #vie{z-index:1}
+.go #vie{z-index:5}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
   html{scroll-behavior:auto}
+  .reveal{opacity:1 !important;transform:none !important}
+  .hero::before{animation:none !important}
 }
 
 </style>
@@ -249,12 +320,14 @@ main{display:none;position:relative;z-index:2}
   <section class="hero" id="hero">
     <canvas class="toile" id="toile" aria-hidden="true"></canvas>
     <div class="hero-in">
-      <p class="surs">Save the date</p>
-      <p class="ser">Nous nous marions</p>
-      <h1 class="noms">Joël<span>&amp;</span>Lafille</h1>
-      <p class="dt">27 · 11 · 2026</p>
-      <p class="lieu-script">Samedi, à 15 heures</p>
-      <p class="defile" id="defile">Faites défiler</p>
+      <p class="surs reveal" style="--d:.05s">Save the date</p>
+      <div class="orn reveal" style="--d:.15s" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p class="ser reveal" style="--d:.25s">Nous nous marions</p>
+      <h1 class="noms reveal" style="--d:.4s">Joël<span>&amp;</span>Lafille</h1>
+      <div class="orn reveal" style="--d:.55s" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p class="dt reveal" style="--d:.65s">27 · 11 · 2026</p>
+      <p class="lieu-script reveal" style="--d:.8s">Samedi, à 15 heures</p>
+      <p class="defile reveal" style="--d:1s" id="defile">Faites défiler<span class="chev" aria-hidden="true"></span></p>
     </div>
   </section>
 
@@ -380,29 +453,96 @@ function brin(ctx, x, y, rot, len) {
   ctx.stroke();
   ctx.restore();
 }
-function dessinerToile() {
+const toileEtat = { t0: 0, sparks: [], started: false };
+function initToileSparks(w, h) {
+  toileEtat.sparks = [];
+  for (let i = 0; i < 28; i++) {
+    toileEtat.sparks.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: 0.8 + Math.random() * 2.2,
+      v: 0.12 + Math.random() * 0.35,
+      p: Math.random() * 6,
+      gold: Math.random() > 0.35
+    });
+  }
+}
+function dessinerToile(now) {
   const cv = document.getElementById("toile");
   const hero = document.getElementById("hero");
   if (!cv || !hero) return;
   const rect = hero.getBoundingClientRect();
   const w = rect.width, h = Math.max(rect.height, innerHeight);
   const dpr = Math.min(devicePixelRatio || 1, 2);
-  cv.width = Math.round(w * dpr);
-  cv.height = Math.round(h * dpr);
-  cv.style.width = w + "px";
-  cv.style.height = h + "px";
+  if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) {
+    cv.width = Math.round(w * dpr);
+    cv.height = Math.round(h * dpr);
+    cv.style.width = w + "px";
+    cv.style.height = h + "px";
+    initToileSparks(w, h);
+  }
   const ctx = cv.getContext("2d");
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  const coins = [[36, 48, -2.3], [w - 36, 48, -0.8], [36, h - 36, 2.4], [w - 36, h - 36, 0.9]];
+  ctx.clearRect(0, 0, w, h);
+  const t = now || performance.now();
+  if (!toileEtat.t0) toileEtat.t0 = t;
+  const sec = (t - toileEtat.t0) / 1000;
+
+  // soft vignette light
+  const lg = ctx.createRadialGradient(w * 0.5, h * 0.42, 40, w * 0.5, h * 0.45, Math.max(w, h) * 0.62);
+  lg.addColorStop(0, "rgba(255,252,246,.35)");
+  lg.addColorStop(0.55, "rgba(255,248,230,.08)");
+  lg.addColorStop(1, "rgba(90,52,38,.06)");
+  ctx.fillStyle = lg;
+  ctx.fillRect(0, 0, w, h);
+
+  const sway = (seed, amp) => Math.sin(sec * 0.9 + seed) * amp;
+  const coins = [
+    [48 + sway(1, 3), 56 + sway(2, 2), -2.3],
+    [w - 48 + sway(3, 3), 56 + sway(4, 2), -0.8],
+    [48 + sway(5, 2), h - 44 + sway(6, 2), 2.4],
+    [w - 48 + sway(7, 2), h - 44 + sway(8, 2), 0.9]
+  ];
   coins.forEach(([x, y, rot], i) => {
-    brin(ctx, x, y, rot, 34);
-    brin(ctx, x, y, rot + 1.1, 26);
-    pivoine(ctx, x, y, 22, i);
+    const breath = 1 + Math.sin(sec * 1.1 + i) * 0.04;
+    brin(ctx, x, y, rot + sway(i, 0.08), 36);
+    brin(ctx, x, y, rot + 1.1 + sway(i + 1, 0.06), 28);
+    pivoine(ctx, x, y, 24 * breath, i + sec * 0.15);
   });
-  for (let x = 110; x < w - 90; x += 92) {
-    pivoine(ctx, x, 30, 13, x);
-    pivoine(ctx, x, h - 26, 13, x + 1);
-    brin(ctx, x + 28, 34, 0.4, 18);
+  for (let x = 120; x < w - 100; x += 100) {
+    const b = 1 + Math.sin(sec * 1.2 + x * 0.01) * 0.05;
+    pivoine(ctx, x + sway(x, 2), 34, 14 * b, x + sec * 0.2);
+    pivoine(ctx, x + sway(x + 9, 2), h - 30, 14 * b, x + 1 + sec * 0.2);
+    brin(ctx, x + 30, 38, 0.4 + sway(x, 0.05), 18);
+  }
+
+  // floating gold dust
+  toileEtat.sparks.forEach(p => {
+    p.y -= p.v;
+    p.x += Math.sin(sec * 1.4 + p.p) * 0.35;
+    if (p.y < -8) { p.y = h + 8; p.x = Math.random() * w; }
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.gold ? "rgba(212,175,55,.7)" : "rgba(230,211,194,.75)";
+    ctx.fill();
+  });
+}
+function animerToile(now) {
+  if (!document.body.classList.contains("go")) {
+    requestAnimationFrame(animerToile);
+    return;
+  }
+  dessinerToile(now);
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    requestAnimationFrame(animerToile);
+  }
+}
+function dessiner() {
+  dessinerToile(performance.now());
+  dessinerGaufrage();
+  if (!toileEtat.started) {
+    toileEtat.started = true;
+    requestAnimationFrame(animerToile);
   }
 }
 function dessinerGaufrage() {
