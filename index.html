@@ -173,7 +173,7 @@ main{display:none;position:relative;z-index:2}
 @keyframes monter{to{opacity:1;transform:none}}
 .orn{
   display:flex;align-items:center;justify-content:center;gap:10px;
-  margin:12px auto;
+  margin:8px auto;
 }
 .orn span{
   display:block;width:42px;height:1px;
@@ -185,11 +185,13 @@ main{display:none;position:relative;z-index:2}
 }
 .surs{
   display:block;width:100%;
-  font:700 clamp(1.45rem,5.5vw,2.15rem)/1.15 'Montserrat',sans-serif;
-  letter-spacing:.32em;text-transform:uppercase;
-  color:var(--brun);
+  font:700 clamp(2.6rem,11vw,4.2rem)/1.05 'Great Vibes',cursive;
+  letter-spacing:0;text-transform:none;
+  color:var(--orf);
   text-align:center;
-  margin:0 auto 4px;
+  margin:0 auto 2px;
+  -webkit-text-stroke:.4px var(--orf);
+  text-shadow:0 2px 14px rgba(141,107,36,.18);
 }
 .ser{
   margin:6px 0 2px;font:italic 500 clamp(1.35rem,4.5vw,1.65rem) 'Cormorant Garamond',serif;
@@ -350,7 +352,6 @@ main{display:none;position:relative;z-index:2}
     <canvas class="toile" id="toile" aria-hidden="true"></canvas>
     <div class="hero-in">
       <p class="surs reveal" style="--d:.05s">Save the date</p>
-      <div class="orn reveal" style="--d:.18s" aria-hidden="true"><span></span><i></i><span></span></div>
       <h1 class="noms reveal" style="--d:.32s">Joël<span>&amp;</span>Lafille</h1>
       <div class="orn reveal" style="--d:.48s" aria-hidden="true"><span></span><i></i><span></span></div>
       <p class="dt reveal" style="--d:.6s">27 · 11 · 2026</p>
