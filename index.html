@@ -512,19 +512,7 @@ function brin(ctx, x, y, rot, len) {
   ctx.restore();
 }
 const toileEtat = { t0: 0, sparks: [], started: false };
-function initToileSparks(w, h) {
-  toileEtat.sparks = [];
-  for (let i = 0; i < 28; i++) {
-    toileEtat.sparks.push({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: 0.8 + Math.random() * 2.2,
-      v: 0.12 + Math.random() * 0.35,
-      p: Math.random() * 6,
-      gold: Math.random() > 0.35
-    });
-  }
-}
+function initToileSparks(w, h) { toileEtat.sparks = []; }
 function dessinerToile(now) {
   const cv = document.getElementById("toile");
   const hero = document.getElementById("hero");
@@ -574,16 +562,7 @@ function dessinerToile(now) {
     brin(ctx, x + 30, 38, 0.4 + sway(x, 0.05), 18);
   }
 
-  // floating gold dust
-  toileEtat.sparks.forEach(p => {
-    p.y -= p.v;
-    p.x += Math.sin(sec * 1.4 + p.p) * 0.35;
-    if (p.y < -8) { p.y = h + 8; p.x = Math.random() * w; }
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = p.gold ? "rgba(212,175,55,.7)" : "rgba(230,211,194,.75)";
-    ctx.fill();
-  });
+  // paillettes hero désactivées
 }
 function animerToile(now) {
   if (!document.body.classList.contains("go")) {
@@ -1052,24 +1031,15 @@ function tailleVie() {
   vie.height = Math.round(innerHeight * dpr);
   vctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
-for (let i = 0; i < 9; i++) papillons.push({
+for (let i = 0; i < 2; i++) papillons.push({
   x: Math.random() * innerWidth, y: Math.random() * innerHeight,
-  vx: (0.35 + Math.random() * 0.65) * (i % 2 ? 1 : -1),
-  s: 0.7 + Math.random() * 0.85,
+  vx: (0.35 + Math.random() * 0.55) * (i % 2 ? 1 : -1),
+  s: 0.85 + Math.random() * 0.35,
   a: Math.random() * 6,
   tint: Math.random(),
   spin: 0.8 + Math.random() * 0.6
 });
-for (let i = 0; i < 42; i++) petales.push({
-  x: Math.random() * innerWidth, y: Math.random() * innerHeight,
-  v: 0.4 + Math.random() * 0.8, r: 4 + Math.random() * 7,
-  rot: Math.random() * 6, vr: (Math.random() - 0.5) * 0.04,
-  bleu: Math.random() > 0.4
-});
-for (let i = 0; i < 32; i++) poussieres.push({
-  x: Math.random() * innerWidth, y: Math.random() * innerHeight,
-  v: 0.18 + Math.random() * 0.4, p: Math.random() * 6, r: 1 + Math.random() * 1.8
-});
+// pas de paillettes / pétales ambiants après ouverture
 function aile(sg, bat, tint, bas) {
   vctx.save();
   vctx.scale(sg * bat, 1);
@@ -1180,49 +1150,11 @@ function dessinerPapillon(p, t) {
   });
   vctx.restore();
 }
-function eclat(x, y) {
-  for (let i = 0; i < 28; i++) {
-    const a = (i / 28) * Math.PI * 2;
-    petales.push({
-      x, y, vx: Math.cos(a) * (1.4 + Math.random() * 2.2),
-      vy: Math.sin(a) * (1.4 + Math.random()) - 1.2,
-      v: 0, r: 4 + Math.random() * 6, rot: Math.random() * 6,
-      vr: (Math.random() - 0.5) * 0.12, bleu: i % 2 === 0, vie: 100
-    });
-  }
-}
+function eclat(x, y) { /* paillettes désactivées */ }
 function animer(t) {
   const w = innerWidth, h = innerHeight;
   vctx.clearRect(0, 0, w, h);
-  poussieres.forEach(p => {
-    p.y -= p.v;
-    p.x += Math.sin(t * 0.001 + p.p) * 0.35;
-    if (p.y < -6) { p.y = h + 6; p.x = Math.random() * w; }
-    vctx.beginPath();
-    vctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    vctx.fillStyle = "rgba(212,175,55,.8)";
-    vctx.fill();
-  });
-  for (let i = petales.length - 1; i >= 0; i--) {
-    const p = petales[i];
-    if (p.vx) {
-      p.x += p.vx; p.y += p.vy; p.vy += 0.025; p.vx *= 0.99;
-      if (--p.vie < 0) { petales.splice(i, 1); continue; }
-    } else {
-      p.y += p.v;
-      p.x += Math.sin(t * 0.0016 + p.rot) * 0.7;
-      if (p.y > h + 12) { p.y = -12; p.x = Math.random() * w; }
-    }
-    p.rot += p.vr;
-    vctx.save();
-    vctx.translate(p.x, p.y);
-    vctx.rotate(p.rot);
-    vctx.beginPath();
-    vctx.ellipse(0, 0, p.r, p.r * 0.42, 0, 0, Math.PI * 2);
-    vctx.fillStyle = p.bleu ? "rgba(230,211,194,.92)" : "rgba(201,162,39,.9)";
-    vctx.fill();
-    vctx.restore();
-  }
+  // paillettes / pétales désactivés — seulement 2 papillons
   papillons.forEach(p => {
     p.x += p.vx;
     p.y += Math.sin(t * 0.002 + p.a) * 0.9;
