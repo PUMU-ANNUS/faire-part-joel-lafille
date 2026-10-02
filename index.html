@@ -184,8 +184,10 @@ main{display:none;position:relative;z-index:2}
   box-shadow:0 0 0 3px rgba(201,162,39,.12);
 }
 .surs{
-  font-size:.7rem;letter-spacing:.42em;text-transform:uppercase;
-  color:var(--brun);font-weight:700;
+  font:700 clamp(1.05rem,3.8vw,1.35rem)/1.2 'Montserrat',sans-serif;
+  letter-spacing:.38em;text-transform:uppercase;
+  color:var(--brun);
+  text-align:center;
 }
 .ser{
   margin:6px 0 2px;font:italic 500 clamp(1.35rem,4.5vw,1.65rem) 'Cormorant Garamond',serif;
@@ -321,13 +323,12 @@ main{display:none;position:relative;z-index:2}
     <canvas class="toile" id="toile" aria-hidden="true"></canvas>
     <div class="hero-in">
       <p class="surs reveal" style="--d:.05s">Save the date</p>
-      <div class="orn reveal" style="--d:.15s" aria-hidden="true"><span></span><i></i><span></span></div>
-      <p class="ser reveal" style="--d:.25s">Nous nous marions</p>
-      <h1 class="noms reveal" style="--d:.4s">Joël<span>&amp;</span>Lafille</h1>
-      <div class="orn reveal" style="--d:.55s" aria-hidden="true"><span></span><i></i><span></span></div>
-      <p class="dt reveal" style="--d:.65s">27 · 11 · 2026</p>
-      <p class="lieu-script reveal" style="--d:.8s">Samedi, à 15 heures</p>
-      <p class="defile reveal" style="--d:1s" id="defile">Faites défiler<span class="chev" aria-hidden="true"></span></p>
+      <div class="orn reveal" style="--d:.18s" aria-hidden="true"><span></span><i></i><span></span></div>
+      <h1 class="noms reveal" style="--d:.32s">Joël<span>&amp;</span>Lafille</h1>
+      <div class="orn reveal" style="--d:.48s" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p class="dt reveal" style="--d:.6s">27 · 11 · 2026</p>
+      <p class="lieu-script reveal" style="--d:.75s">Samedi, à 15 heures</p>
+      <p class="defile reveal" style="--d:.95s" id="defile">Faites défiler<span class="chev" aria-hidden="true"></span></p>
     </div>
   </section>
 
