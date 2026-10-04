@@ -1031,15 +1031,15 @@ function tailleVie() {
   vie.height = Math.round(innerHeight * dpr);
   vctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
-for (let i = 0; i < 2; i++) papillons.push({
+for (let i = 0; i < 10; i++) papillons.push({
   x: Math.random() * innerWidth, y: Math.random() * innerHeight,
   vx: (1.6 + Math.random() * 1.2) * (i % 2 ? 1 : -1),
-  s: 0.85 + Math.random() * 0.35,
+  s: 0.75 + Math.random() * 0.45,
   a: Math.random() * 6,
   tint: Math.random(),
   spin: 1.2 + Math.random() * 0.8
 });
-// pas de paillettes / pétales ambiants après ouverture
+// avant ouverture: plusieurs papillons — après: seulement 2 + cœurs
 function aile(sg, bat, tint, bas) {
   vctx.save();
   vctx.scale(sg * bat, 1);
@@ -1199,17 +1199,23 @@ function animer(t) {
     vctx.fill();
     vctx.restore();
   }
-  // 2 papillons après ouverture + pétales cœur
-  if (ouvert) {
-    papillons.forEach(p => {
-      p.x += p.vx;
-      p.y += Math.sin(t * 0.004 + p.a) * 1.4;
-      if (p.vx > 0 && p.x > w + 50) { p.x = -50; p.y = Math.random() * h; }
-      if (p.vx < 0 && p.x < -50) { p.x = w + 50; p.y = Math.random() * h; }
-      laisserCoeur(p);
-      dessinerPapillon(p, t);
-    });
+  // avant: tous les papillons — après ouverture: 2 seulement + cœurs
+  if (!ouvert && papillons.length > 2 && !window.__papTrimmed) {
+    /* keep all before open */
   }
+  if (ouvert && papillons.length > 2) {
+    papillons.length = 2;
+    window.__papTrimmed = true;
+    petales.length = 0;
+  }
+  papillons.forEach(p => {
+    p.x += p.vx;
+    p.y += Math.sin(t * 0.004 + p.a) * 1.4;
+    if (p.vx > 0 && p.x > w + 50) { p.x = -50; p.y = Math.random() * h; }
+    if (p.vx < 0 && p.x < -50) { p.x = w + 50; p.y = Math.random() * h; }
+    if (ouvert) laisserCoeur(p);
+    dessinerPapillon(p, t);
+  });
   requestAnimationFrame(animer);
 }
 tailleVie();
