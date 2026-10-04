@@ -1033,11 +1033,11 @@ function tailleVie() {
 }
 for (let i = 0; i < 2; i++) papillons.push({
   x: Math.random() * innerWidth, y: Math.random() * innerHeight,
-  vx: (0.35 + Math.random() * 0.55) * (i % 2 ? 1 : -1),
+  vx: (1.6 + Math.random() * 1.2) * (i % 2 ? 1 : -1),
   s: 0.85 + Math.random() * 0.35,
   a: Math.random() * 6,
   tint: Math.random(),
-  spin: 0.8 + Math.random() * 0.6
+  spin: 1.2 + Math.random() * 0.8
 });
 // pas de paillettes / pétales ambiants après ouverture
 function aile(sg, bat, tint, bas) {
@@ -1162,7 +1162,7 @@ function coeurPath(ctx, x, y, s) {
 }
 function laisserCoeur(p) {
   if (!document.body.classList.contains("go")) return;
-  if (Math.random() > 0.18) return;
+  if (Math.random() > 0.28) return;
   petales.push({
     x: p.x - p.vx * 6 + (Math.random() - 0.5) * 10,
     y: p.y + 8 + Math.random() * 6,
@@ -1203,7 +1203,7 @@ function animer(t) {
   if (ouvert) {
     papillons.forEach(p => {
       p.x += p.vx;
-      p.y += Math.sin(t * 0.002 + p.a) * 0.9;
+      p.y += Math.sin(t * 0.004 + p.a) * 1.4;
       if (p.vx > 0 && p.x > w + 50) { p.x = -50; p.y = Math.random() * h; }
       if (p.vx < 0 && p.x < -50) { p.x = w + 50; p.y = Math.random() * h; }
       laisserCoeur(p);
