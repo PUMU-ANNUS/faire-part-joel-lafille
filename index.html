@@ -1151,17 +1151,65 @@ function dessinerPapillon(p, t) {
   vctx.restore();
 }
 function eclat(x, y) { /* paillettes désactivées */ }
+function coeurPath(ctx, x, y, s) {
+  ctx.beginPath();
+  ctx.moveTo(x, y + s * 0.35);
+  ctx.bezierCurveTo(x, y, x - s, y, x - s, y + s * 0.35);
+  ctx.bezierCurveTo(x - s, y + s * 0.7, x, y + s * 1.05, x, y + s * 1.35);
+  ctx.bezierCurveTo(x, y + s * 1.05, x + s, y + s * 0.7, x + s, y + s * 0.35);
+  ctx.bezierCurveTo(x + s, y, x, y, x, y + s * 0.35);
+  ctx.closePath();
+}
+function laisserCoeur(p) {
+  if (!document.body.classList.contains("go")) return;
+  if (Math.random() > 0.18) return;
+  petales.push({
+    x: p.x - p.vx * 6 + (Math.random() - 0.5) * 10,
+    y: p.y + 8 + Math.random() * 6,
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: 0.35 + Math.random() * 0.55,
+    r: 5 + Math.random() * 5,
+    rot: Math.random() * Math.PI,
+    vr: (Math.random() - 0.5) * 0.05,
+    vie: 140 + Math.random() * 60,
+    gold: Math.random() > 0.4
+  });
+  if (petales.length > 48) petales.splice(0, petales.length - 48);
+}
 function animer(t) {
   const w = innerWidth, h = innerHeight;
   vctx.clearRect(0, 0, w, h);
-  // paillettes / pétales désactivés — seulement 2 papillons
-  papillons.forEach(p => {
-    p.x += p.vx;
-    p.y += Math.sin(t * 0.002 + p.a) * 0.9;
-    if (p.vx > 0 && p.x > w + 50) { p.x = -50; p.y = Math.random() * h; }
-    if (p.vx < 0 && p.x < -50) { p.x = w + 50; p.y = Math.random() * h; }
-    dessinerPapillon(p, t);
-  });
+  const ouvert = document.body.classList.contains("go");
+  // pétales-cœurs laissés par les papillons
+  for (let i = petales.length - 1; i >= 0; i--) {
+    const c = petales[i];
+    c.x += c.vx;
+    c.y += c.vy;
+    c.vy += 0.008;
+    c.rot += c.vr;
+    c.vie -= 1;
+    if (c.vie <= 0 || c.y > h + 20) { petales.splice(i, 1); continue; }
+    const a = Math.max(0, Math.min(1, c.vie / 140));
+    vctx.save();
+    vctx.translate(c.x, c.y);
+    vctx.rotate(c.rot);
+    vctx.globalAlpha = a * 0.9;
+    coeurPath(vctx, 0, -c.r * 0.5, c.r * 0.55);
+    vctx.fillStyle = c.gold ? "rgba(201,162,39,.92)" : "rgba(139,74,74,.88)";
+    vctx.fill();
+    vctx.restore();
+  }
+  // 2 papillons après ouverture + pétales cœur
+  if (ouvert) {
+    papillons.forEach(p => {
+      p.x += p.vx;
+      p.y += Math.sin(t * 0.002 + p.a) * 0.9;
+      if (p.vx > 0 && p.x > w + 50) { p.x = -50; p.y = Math.random() * h; }
+      if (p.vx < 0 && p.x < -50) { p.x = w + 50; p.y = Math.random() * h; }
+      laisserCoeur(p);
+      dessinerPapillon(p, t);
+    });
+  }
   requestAnimationFrame(animer);
 }
 tailleVie();
